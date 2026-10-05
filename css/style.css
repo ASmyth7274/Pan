@@ -111,9 +111,10 @@ svg.i { width: 1em; height: 1em; display: inline-block; vertical-align: -0.14em;
 .chip-b.calm { color: var(--muted); }
 
 #tracker {
-  align-self: flex-start; display: none; align-items: center; gap: 8px; max-width: min(92vw, 420px);
-  padding: 6px 12px 6px 8px; border-radius: 14px; font-size: 13px;
+  align-self: flex-start; display: none; align-items: center; gap: 8px; max-width: min(100%, 440px);
+  padding: 6px 12px 6px 8px; border-radius: 14px; font-size: 13px; text-align: left;
 }
+#tracker .q-count { margin-left: auto; padding-left: 6px; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; flex: none; }
 #tracker.show { display: flex; }
 #tracker .q-npc { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-size: 14px; flex: none; }
 #tracker .q-text { display: flex; flex-direction: column; min-width: 0; }

@@ -569,9 +569,10 @@ export class UI {
       el.classList.add('show');
       el.classList.toggle('ready', tq.done);
       el.dataset.npc = tq.npc.id;
+      const count = tq.done || (tq.q.goal.type === 'own' || tq.q.goal.type === 'travel') ? '' : `<span class="q-count">${fmtNum(pct)}/${fmtNum(tq.n)}</span>`;
       el.innerHTML = `<span class="q-npc" style="background:${tq.npc.color}33;color:${tq.npc.color}">${icon(tq.done ? 'gift' : 'quests')}</span>
         <span class="q-text"><span class="q-title">${tq.done ? 'Quest complete! Tap to claim' : escapeHtml(tq.q.title)}</span>
-        <span class="q-prog">${tq.done ? escapeHtml(tq.q.title) + ' · ' + escapeHtml(tq.npc.name) : `${escapeHtml(tq.q.text)} (${fmtNum(pct)}/${fmtNum(tq.n)})`}</span></span>`;
+        <span class="q-prog">${tq.done ? escapeHtml(tq.q.title) + ' · ' + escapeHtml(tq.npc.name) : escapeHtml(tq.q.text)}</span></span>${count}`;
     } else {
       el.classList.add('show', 'ready');
       el.dataset.npc = '';

@@ -1153,6 +1153,7 @@ PANELS.actions = {
       const st = importSave(code);
       const ok = await ui.confirm({ title: 'Import save?', text: `Replace this device's progress with <b>${escapeHtml(st.name)}</b> (level ${st.level}, ${fmtCash(st.cash)})?`, ok: 'Import', danger: true });
       if (!ok) return;
+      ui.g.resetting = true; // stop the unload auto-save from overwriting the import
       saveState(st);
       location.reload();
     } catch (e) {

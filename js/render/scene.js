@@ -808,6 +808,7 @@ export class Scene {
     for (const tg of tags) {
       const a = tg.a;
       const w = ctx.measureText(a.name).width + 8;
+      tg.x = clamp(tg.x, w / 2 + 4, this.W - w / 2 - 4);
       let y = tg.y;
       let ok = true;
       for (let tries = 0; tries < 3; tries++) {
