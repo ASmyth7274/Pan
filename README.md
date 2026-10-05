@@ -71,6 +71,7 @@ npx http-server . -p 8080 -c-1     # then open http://localhost:8080
 node tools/sim.mjs 24              # simulate 24 h of play to check the economy
 node tools/smoke.mjs               # headless test of the game rules
 node tools/build-sw.mjs            # run after changing files, to refresh the offline cache list
+node tools/build-single.mjs        # optional: one self-contained HTML file in dist/
 ```
 
 *Fan-made and not affiliated with Roblox or the creators of Prospecting!. The Fredoka font is used under the SIL Open Font License.*

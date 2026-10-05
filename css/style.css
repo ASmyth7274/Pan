@@ -71,7 +71,7 @@ svg.i { width: 1em; height: 1em; display: inline-block; vertical-align: -0.14em;
 /* ── HUD ─────────────────────────────────────────────────────────────── */
 #hud {
   position: absolute; top: 0; left: 0; right: 0;
-  padding: calc(var(--st) + 8px) calc(var(--sr) + 10px) 0 calc(var(--sl) + 10px);
+  padding: calc(var(--st) + 8px) calc(var(--sr) + 16px) 0 calc(var(--sl) + 16px);
   display: flex; flex-direction: column; gap: 6px; pointer-events: none;
 }
 #hud > * { pointer-events: auto; }
@@ -138,7 +138,7 @@ svg.i { width: 1em; height: 1em; display: inline-block; vertical-align: -0.14em;
 @keyframes toastOut { to { opacity: 0; transform: translateY(-6px); } }
 
 #finds {
-  position: absolute; right: calc(var(--sr) + 10px); top: calc(var(--st) + 150px);
+  position: absolute; right: calc(var(--sr) + 16px); top: calc(var(--st) + 150px);
   display: flex; flex-direction: column; gap: 6px; align-items: flex-end; pointer-events: none; z-index: 20;
 }
 .find {
@@ -168,7 +168,7 @@ svg.i { width: 1em; height: 1em; display: inline-block; vertical-align: -0.14em;
 
 /* ── chat feed ──────────────────────────────────────────────────────── */
 #chatfeed {
-  position: absolute; left: calc(var(--sl) + 10px); bottom: calc(var(--sb) + var(--dock-h) + var(--action) + 64px);
+  position: absolute; left: calc(var(--sl) + 16px); bottom: calc(var(--sb) + var(--dock-h) + var(--action) + 64px);
   width: min(64vw, 340px); display: flex; flex-direction: column; gap: 3px; z-index: 5;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%); mask-image: linear-gradient(to bottom, transparent, #000 30%);
 }
@@ -245,7 +245,7 @@ svg.i { width: 1em; height: 1em; display: inline-block; vertical-align: -0.14em;
 /* ── dock ───────────────────────────────────────────────────────────── */
 #dock {
   position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(var(--sb) + 6px);
-  width: min(calc(100vw - 16px), 520px); height: var(--dock-h); border-radius: 22px; z-index: 12;
+  width: min(calc(100vw - 32px), 520px); height: var(--dock-h); border-radius: 22px; z-index: 12;
   display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; padding: 0 4px;
 }
 .dock-btn { position: relative; height: 54px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 11px; font-weight: 600; color: var(--muted); }
