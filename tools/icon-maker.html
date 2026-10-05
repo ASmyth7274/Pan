@@ -1,0 +1,68 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Pan! icon maker</title></head>
+<body style="background:#222">
+<script type="module">
+// Renders the app icons from the game's own procedural art.
+// Used by tools/make-icons.mjs (Playwright) to write PNG files.
+import { drawIcon } from '../js/render/icons.js';
+
+function star(ctx, x, y, s, color) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(x, y - s); ctx.quadraticCurveTo(x, y, x + s, y); ctx.quadraticCurveTo(x, y, x, y + s);
+  ctx.quadraticCurveTo(x, y, x - s, y); ctx.quadraticCurveTo(x, y, x, y - s); ctx.fill();
+}
+
+function render(size, { pad = 0, round = false } = {}) {
+  const c = document.createElement('canvas');
+  c.width = c.height = size;
+  const ctx = c.getContext('2d');
+  const k = size / 512;
+  ctx.scale(k, k);
+  if (round) { ctx.beginPath(); ctx.roundRect(0, 0, 512, 512, 112); ctx.clip(); }
+  const bg = ctx.createRadialGradient(256, 210, 20, 256, 256, 380);
+  bg.addColorStop(0, '#3b4fa0');
+  bg.addColorStop(0.55, '#1a2350');
+  bg.addColorStop(1, '#0b1020');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, 512, 512);
+  // rays
+  ctx.save();
+  ctx.translate(256, 250);
+  for (let i = 0; i < 16; i++) {
+    ctx.rotate(Math.PI / 8);
+    ctx.fillStyle = 'rgba(255,215,110,0.06)';
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-30, -400); ctx.lineTo(30, -400); ctx.fill();
+  }
+  ctx.restore();
+  const s = (512 - pad * 2) / 512;
+  ctx.translate(256, 256);
+  ctx.scale(s, s);
+  ctx.translate(-256, -256);
+  // pan
+  ctx.save();
+  ctx.translate(256 - 64 * 3.4, 300 - 66 * 3.4);
+  ctx.scale(3.4, 3.4);
+  drawIcon(ctx, 'pan', 'golden');
+  ctx.restore();
+  // nuggets & gem in the pan
+  const put = (id, x, y, sc) => { ctx.save(); ctx.translate(x - 64 * sc, y - 66 * sc); ctx.scale(sc, sc); drawIcon(ctx, 'mineral', id); ctx.restore(); };
+  put('gold', 196, 262, 1.15);
+  put('gold', 318, 276, 0.9);
+  put('painite', 262, 222, 1.35);
+  star(ctx, 380, 150, 26, '#fff8d6');
+  star(ctx, 140, 178, 16, '#fff8d6');
+  star(ctx, 352, 352, 12, '#ffe9a8');
+  return c.toDataURL('image/png');
+}
+
+window.__icons = {
+  'icon-512.png': render(512),
+  'icon-192.png': render(192),
+  'apple-touch-icon.png': render(180),
+  'maskable-512.png': render(512, { pad: 70 }),
+  'favicon-32.png': render(32, { round: true }),
+  'preview.png': render(512, { round: true }),
+};
+window.__done = true;
+</script></body></html>

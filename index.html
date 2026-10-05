@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Pan! – Prospecting Simulator</title>
+  <meta name="description" content="Dig, pan and prospect for 160+ minerals across 13 shores. Events, potions, totems, enchants, a museum and a bustling server of fellow prospectors.">
+  <meta name="theme-color" content="#0d1222">
+  <meta name="color-scheme" content="dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pan!">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="world" aria-label="Game world"></canvas>
+  <div id="app"></div>
+  <div id="loading">
+    <div class="logo">Pan!</div>
+    <div class="tagline">Prospecting Simulator</div>
+    <div class="bar"><i></i></div>
+  </div>
+  <noscript><p style="color:#fff;text-align:center;margin-top:40vh;font-family:sans-serif">Pan! needs JavaScript to run.</p></noscript>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

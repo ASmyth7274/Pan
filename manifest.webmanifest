@@ -1,0 +1,19 @@
+{
+  "name": "Pan! – Prospecting Simulator",
+  "short_name": "Pan!",
+  "description": "Dig, pan and prospect for 160+ minerals across 13 shores. Events, potions, totems, enchants, a museum and a bustling server of fellow prospectors.",
+  "id": "./",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen"],
+  "orientation": "any",
+  "background_color": "#0d1222",
+  "theme_color": "#0d1222",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

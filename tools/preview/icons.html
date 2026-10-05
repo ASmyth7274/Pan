@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Icon preview</title>
+<style>body{background:#1b2133;color:#ddd;font:11px sans-serif;margin:8px}
+.grid{display:grid;grid-template-columns:repeat(12,80px);gap:4px}
+.c{text-align:center}.c img{width:72px;height:72px;background:#2a3350;border-radius:10px}</style></head>
+<body><div class="grid" id="g"></div>
+<script type="module">
+import { iconURL } from '../../js/render/icons.js';
+import { MINERALS } from '../../js/data/minerals.js';
+import { PANS, SHOVELS, SLUICES } from '../../js/data/gear.js';
+import { POTIONS, TOTEMS, TOKENS, OUTFITS, RECIPES } from '../../js/data/items.js';
+const g = document.getElementById('g');
+const add = (kind, id, name) => { const d = document.createElement('div'); d.className = 'c'; d.innerHTML = `<img src="${iconURL(kind, id)}"><div>${name}</div>`; g.appendChild(d); };
+const which = new URLSearchParams(location.search).get('set') || 'minerals';
+if (which === 'minerals') MINERALS.forEach(m => add('mineral', m.id, m.name));
+else {
+  PANS.forEach(p => add('pan', p.id, p.name)); SHOVELS.forEach(p => add('shovel', p.id, p.name)); SLUICES.forEach(p => add('sluice', p.id, p.name));
+  POTIONS.forEach(p => add('item', p.id, p.name)); TOTEMS.forEach(p => add('item', p.id, p.name)); TOKENS.forEach(p => add('item', p.id, p.name));
+  add('item', 'book:lucky', 'Book'); OUTFITS.forEach(p => add('outfit', p.id, p.name)); RECIPES.forEach(p => add('equip', p.id, p.name));
+}
+window.__done = true;
+</script></body></html>

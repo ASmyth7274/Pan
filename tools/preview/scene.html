@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Scene preview</title>
+<style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+<link rel="preload" href="../../assets/fonts/fredoka.woff2" as="font" crossorigin>
+<style>@font-face{font-family:Fredoka;src:url(../../assets/fonts/fredoka.woff2) format('woff2');font-weight:300 700}</style>
+</head><body><canvas id="c"></canvas>
+<script type="module">
+import { defaultState } from '../../js/state.js';
+import { Game } from '../../js/game.js';
+import { BotManager } from '../../js/bots.js';
+import { Scene } from '../../js/render/scene.js';
+import { dayInfo, DAY_MS } from '../../js/worldclock.js';
+import { EVENT } from '../../js/data/events.js';
+const q = new URLSearchParams(location.search);
+const s = defaultState();
+s.shore = q.get('shore') || 'rubble';
+s.shores = [s.shore];
+s.pans = ['rusty', 'golden']; s.pan = 'golden';
+const g = new Game(s);
+g.bots = new BotManager(g, null);
+for (const b of g.bots.active) { b.shore = s.shore; b.x = Math.random() * 0.9 + 0.05; }
+const phase = Number(q.get('phase') ?? 0.25);
+const fixed = Math.floor(Date.now() / DAY_MS) * DAY_MS + phase * DAY_MS;
+g.day = () => dayInfo(fixed);
+const ev = q.get('event');
+await document.fonts.load('16px Fredoka');
+const scene = new Scene(document.getElementById('c'), g);
+if (q.get('mode') === 'pan') { g.phase = 'pan'; g.pan.shaking = true; s.pending.sed = 3; }
+for (let i = 0; i < 90; i++) {
+  g.bots.update(1 / 30);
+  g.events = ev ? [{ key: 'x', def: EVENT[ev], shore: s.shore, end: Date.now() + 1e6, source: 'server' }] : [];
+  scene.render(1 / 30);
+}
+window.__done = true;
+</script></body></html>
