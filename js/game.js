@@ -197,7 +197,7 @@ export class Game extends Emitter {
 
   gradeFor(x, zone) {
     const d = Math.abs(x - zone);
-    if (d <= 0.045) return 'perfect';
+    if (d <= 0.05) return 'perfect';
     if (d <= 0.1) return 'great';
     if (d <= 0.18) return 'good';
     if (x < 0.2) return 'weak';

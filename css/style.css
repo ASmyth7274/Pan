@@ -236,7 +236,7 @@ svg.i { width: 1em; height: 1em; display: inline-block; vertical-align: -0.14em;
 #action.pan .face .lbl-sub { position: absolute; bottom: 10px; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); z-index: 2; }
 #action.glint .face { box-shadow: 0 0 0 4px rgba(255, 236, 140, 0.9), 0 0 28px rgba(255, 220, 90, 0.9); }
 #gradepop {
-  position: absolute; top: -34px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-weight: 700; font-size: 18px;
+  position: absolute; top: -70px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-weight: 700; font-size: 19px;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.6); pointer-events: none; opacity: 0;
 }
 #gradepop.show { animation: gradePop 0.7s ease-out; }
@@ -262,7 +262,7 @@ svg.i { width: 1em; height: 1em; display: inline-block; vertical-align: -0.14em;
 #sheets { position: absolute; inset: 0; z-index: 50; pointer-events: none; }
 .backdrop { position: absolute; inset: 0; background: rgba(4, 6, 14, 0.55); pointer-events: auto; animation: fadeIn 0.2s; }
 .sheet {
-  position: absolute; left: 0; right: 0; bottom: 0; max-height: calc(100% - var(--st) - 28px); height: 86%;
+  position: absolute; left: 0; right: 0; bottom: var(--kb, 0px); max-height: calc(100% - var(--st) - 28px - var(--kb, 0px)); height: 86%;
   background: var(--panel-solid); border-radius: 24px 24px 0 0; border: 1px solid var(--stroke-2); border-bottom: 0;
   display: flex; flex-direction: column; pointer-events: auto; box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
   animation: sheetUp 0.32s cubic-bezier(0.2, 1, 0.3, 1); padding-bottom: var(--sb); overflow: hidden;

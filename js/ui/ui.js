@@ -138,6 +138,16 @@ export class UI {
     act.addEventListener('pointercancel', up);
     act.addEventListener('lostpointercapture', up);
     act.addEventListener('contextmenu', (e) => e.preventDefault());
+    // iOS: keep inputs in sheets above the on-screen keyboard
+    const vv = window.visualViewport;
+    if (vv) {
+      const onVV = () => {
+        const kb = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+        document.documentElement.style.setProperty('--kb', kb > 60 ? kb + 'px' : '0px');
+      };
+      vv.addEventListener('resize', onVV);
+      vv.addEventListener('scroll', onVV);
+    }
     // keyboard
     window.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
@@ -284,7 +294,7 @@ export class UI {
       const show = g.dig.charging;
       this.setRingArc(el.zGood, show ? z - 0.18 : 0, show ? z + 0.18 : 0);
       this.setRingArc(el.zGreat, show ? z - 0.1 : 0, show ? z + 0.1 : 0);
-      this.setRingArc(el.zPerfect, show ? z - 0.045 : 0, show ? z + 0.045 : 0);
+      this.setRingArc(el.zPerfect, show ? z - 0.05 : 0, show ? z + 0.05 : 0);
       this.setRingArc(el.needle, 0, show ? g.dig.needle : 0);
       this.setRingArc(el.panRing, 0, g.dig.cooldown > 0 ? 1 - g.dig.cooldown / Math.max(0.01, g.dig.swing) : 0);
       el.panRing.setAttribute('stroke', '#ffd54f');

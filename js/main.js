@@ -62,6 +62,10 @@ async function boot() {
   window.addEventListener('pagehide', persist);
   window.addEventListener('beforeunload', persist);
 
+  // iOS only unlocks WebAudio from certain gesture events
+  const unlock = () => audio.unlock();
+  for (const ev of ['touchend', 'click', 'keydown']) document.addEventListener(ev, unlock, { passive: true });
+
   // iOS: block pinch-zoom / double-tap zoom gestures on the game surface
   document.addEventListener('gesturestart', (e) => e.preventDefault(), { passive: false });
   document.addEventListener('dblclick', (e) => e.preventDefault(), { passive: false });
@@ -74,7 +78,9 @@ async function boot() {
 
 function registerServiceWorker(ui) {
   if (!('serviceWorker' in navigator) || location.protocol === 'file:') return;
-  navigator.serviceWorker.register('./sw.js').then((reg) => {
+  let reg;
+  try { reg = navigator.serviceWorker.register('./sw.js'); } catch { return; } // sandboxed frames refuse service workers
+  reg.then((reg) => {
     reg.addEventListener('updatefound', () => {
       const nw = reg.installing;
       nw?.addEventListener('statechange', () => {

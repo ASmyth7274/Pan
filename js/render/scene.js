@@ -865,7 +865,7 @@ export class Scene {
     if (light < 0.4 && ambient !== 'fireflies' && (ambient === 'leaves' || theme.flora === 'oak') && Math.random() < 0.05 * q) {
       spawn({ type: 'firefly', x: rand(0, W), y: rand(L.horizonY, H * 0.75), vx: rand(-8, 8), vy: rand(-8, 8), g: 0, life: 5, max: 5, s: rand(1.5, 2.5), c: '#e6ee9c' });
     }
-    if (ev.has('goldrush') && Math.random() < 0.3 * q) spawn({ type: 'spark', x: rand(0, W), y: rand(0, H * 0.7), vx: 0, vy: rand(-20, -5), g: 0, life: 1.5, max: 1.5, s: rand(2, 4), c: '#ffd54f' });
+    if (ev.has('goldrush') && Math.random() < 0.45 * q) spawn({ type: Math.random() < 0.5 ? 'coin' : 'spark', x: rand(0, W), y: rand(-10, H * 0.4), vx: rand(-10, 10), vy: rand(30, 80), g: 20, life: 3, max: 3, s: rand(3, 5), c: '#ffd54f' });
     if (ev.has('blessing') && Math.random() < 0.4 * q) spawn({ type: 'spark', x: rand(0, W), y: rand(0, H * 0.6), vx: 0, vy: rand(10, 30), g: 0, life: 2, max: 2, s: rand(2, 5), c: '#fff59d' });
     if (ev.has('convergence') && Math.random() < 0.4 * q) spawn({ type: 'spark', x: rand(0, W), y: rand(0, H * 0.6), vx: rand(-10, 10), vy: rand(-10, 10), g: 0, life: 2, max: 2, s: rand(2, 5), c: ['#ff80ff', '#80d8ff', '#ccff90', '#ffe57f'][Math.floor(Math.random() * 4)] });
 
@@ -1006,6 +1006,13 @@ export class Scene {
     }
     if (ev.has('drought')) {
       ctx.fillStyle = 'rgba(255,200,120,0.08)';
+      ctx.fillRect(0, 0, W, H);
+    }
+    if (ev.has('goldrush')) {
+      const gv = ctx.createRadialGradient(W / 2, H * 0.45, Math.min(W, H) * 0.3, W / 2, H * 0.45, Math.max(W, H) * 0.75);
+      gv.addColorStop(0, 'rgba(255,214,90,0)');
+      gv.addColorStop(1, `rgba(255,196,60,${0.22 + 0.06 * Math.sin(t * 2)})`);
+      ctx.fillStyle = gv;
       ctx.fillRect(0, 0, W, H);
     }
     if (ev.has('blessing') || ev.has('convergence')) {
